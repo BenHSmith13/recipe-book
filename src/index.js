@@ -5,7 +5,16 @@ import reportWebVitals from './reportWebVitals';
 import firebase from 'firebase';
 import withFirebaseAuth from 'react-with-firebase-auth'
 import 'firebase/auth';
+import "firebase/firestore";
 import firebaseConfig from './firebaseConfig';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import rootReducer from 'Reducers';
+
+const store = createStore(
+  rootReducer,
+  {},
+);
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 
@@ -21,9 +30,9 @@ const Application = withFirebaseAuth({
 })(App);
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <Application />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
 
