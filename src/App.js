@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import 'firebaseui/dist/firebaseui.css'
+import "firebase/auth";
+import "firebase/firestore";
 
-function App() {
+import Router from 'Router';
+import Login from 'Components/View/Login';
+
+function App({
+  user,
+  signOut,
+  signInWithGoogle,
+}) {
+  if (user) {
+    return (
+      <Router />
+    );
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Login
+      login={signInWithGoogle}
+    />
   );
 }
 

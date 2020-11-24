@@ -1,12 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import firebase from 'firebase';
+import withFirebaseAuth from 'react-with-firebase-auth'
+import 'firebase/auth';
+import firebaseConfig from './firebaseConfig';
+
+const firebaseApp = firebase.initializeApp(firebaseConfig);
+
+const firebaseAppAuth = firebaseApp.auth();
+
+const providers = {
+  googleProvider: new firebase.auth.GoogleAuthProvider(),
+};
+
+const Application = withFirebaseAuth({
+  providers,
+  firebaseAppAuth,
+})(App);
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Application />
   </React.StrictMode>,
   document.getElementById('root')
 );
